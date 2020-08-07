@@ -18,7 +18,9 @@
   "homepage": "https://github.com/shahriariqbal079/ecommerce_mern_stack#readme",
   "dependencies": {
     "axios": "^0.19.2",
-    "express": "^4.17.1"
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.27"
   },
   "devDependencies": {
     "@babel/cli": "^7.10.5",
