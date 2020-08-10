@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { addToCart, removeFromCart } from "../actions/cartActions";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-
 function CartScreen(props) {
   const cart = useSelector((state) => state.cart);
 
@@ -13,11 +12,9 @@ function CartScreen(props) {
     ? Number(props.location.search.split("=")[1])
     : 1;
   const dispatch = useDispatch();
-
   const removeFromCartHandler = (productId) => {
     dispatch(removeFromCart(productId));
   };
-
   useEffect(() => {
     if (productId) {
       dispatch(addToCart(productId, qty));
@@ -33,11 +30,11 @@ function CartScreen(props) {
       <div className="cart-list">
         <ul className="cart-list-container">
           <li>
-            <h3> Shopping Cart </h3>
-            <div> Price </div>
+            <h3>Shopping Cart</h3>
+            <div>Price</div>
           </li>
           {cartItems.length === 0 ? (
-            <div> Cart is Empty </div>
+            <div>Cart is empty</div>
           ) : (
             cartItems.map((item) => (
               <li>
@@ -56,13 +53,15 @@ function CartScreen(props) {
                         dispatch(addToCart(item.product, e.target.value))
                       }
                     >
-                      <option value="1"> 1 </option>
-                      <option value="2"> 2 </option>
-                      <option value="3"> 3 </option>
+                      {[...Array(item.countInStock).keys()].map((x) => (
+                        <option key={x + 1} value={x + 1}>
+                          {x + 1}
+                        </option>
+                      ))}
                     </select>
                     <button
                       type="button"
-                      className="button "
+                      className="button"
                       onClick={() => removeFromCartHandler(item.product)}
                     >
                       Delete
